@@ -1,0 +1,4 @@
+https://github.com/toshima/futoshiki/blob/master/solve_futoshiki.py
+
+https://github.com/Ocoras/futoshiki-solver/blob/master/solver.py
+
