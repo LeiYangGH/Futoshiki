@@ -5,12 +5,24 @@
 #       we stop and return a complete solution once one has been found
 
 import pygame, Snapshot, Cell, Futoshiki_IO
-
+cnt = 0
 def solve(snapshot, screen):
     # display current snapshot
-    pygame.time.delay(200)
+
+
+
+
+
+    pygame.time.delay(600)
     Futoshiki_IO.displayPuzzle(snapshot, screen)
     pygame.display.flip()
+    global cnt
+
+    while cnt < 4:
+        cnt += 1
+        snapshot = snapshot.clone()
+        snapshot.setCellVal(4,cnt,cnt)
+        solve(snapshot,screen)
     # if current snapshot is complete ... return a value
 
     # if isComplete(snapshot) and checkConsistency(snapshot):
