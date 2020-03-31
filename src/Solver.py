@@ -10,7 +10,7 @@ from collections import Counter
 
 def solve(snapshot, screen):
     # display current snapshot
-    pygame.time.delay(300)
+    pygame.time.delay(20)
     Futoshiki_IO.displayPuzzle(snapshot, screen)
     pygame.display.flip()
     # if current snapshot is complete ... return a value
@@ -20,7 +20,7 @@ def solve(snapshot, screen):
 
     next_empty_cell = snapshot.unsolvedCells()[0]
 
-    for var in next_empty_cell.possibles:
+    for var in next_empty_cell.getPossibles(snapshot):
         # print(f'var={var}')
         newsnapshot = snapshot.clone()
         newsnapshot.setCellVal(next_empty_cell.getRow(), next_empty_cell.getCol(), var)
@@ -45,6 +45,18 @@ def checkConsistency(snapshot):
             if v >= 2:
                 # print(f'check col Consistency={False}')
                 return False
+
+    for (coords1, coords2) in snapshot.getConstraints():
+        var1 = snapshot.getCellVal(coords1[0], coords1[1])
+        var2 = snapshot.getCellVal(coords2[0], coords2[1])
+        if var1 == 4:
+            return False
+        if var2 == 1:
+            return False
+
+        if var1 > 0 and var2 > 0 and var1 >= var2:
+            return False
+
     # print(f'checkConsistency={True}')
     return True
 
