@@ -26,6 +26,7 @@ while done==False:
                 if event.key == pygame.K_t:
                     # Choose a random puzzle to solve
                     trivialpuzzle = random.choice(os.listdir("trivialpuzzles")) #change dir name if necessary
+                    # trivialpuzzle = 'tpuzzle0.txt'
                     trivialpuzzle = "trivialpuzzles/" + trivialpuzzle
                     firstSnapshot = Futoshiki_IO.loadPuzzle(trivialpuzzle) 
                     Solver.solve(firstSnapshot, screen)
