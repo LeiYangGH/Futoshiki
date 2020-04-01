@@ -21,7 +21,7 @@ def solve(snapshot, screen):
     next_empty_cell = snapshot.unsolvedCells()[0]
 
     for var in next_empty_cell.getPossibles(snapshot):
-        # print(f'var={var}')
+        print(f'trying fill [{next_empty_cell.getRow()},{next_empty_cell.getCol()}] var={var}')
         newsnapshot = snapshot.clone()
         newsnapshot.setCellVal(next_empty_cell.getRow(), next_empty_cell.getCol(), var)
         if checkConsistency(newsnapshot):
@@ -36,28 +36,31 @@ def checkConsistency(snapshot):
         # print(k,v)
         for k, v in Counter([c.getVal() for c in snapshot.cellsByRow(r) if c.getVal() > 0]).items():
             if v >= 2:
-                # print(f'check row Consistency={False}')
+                print(f'check row Consistency={False}')
                 return False
     for c in range(5):
         for k, v in Counter([c.getVal() for c in snapshot.cellsByCol(c) if c.getVal() > 0]).items():
             # print(k,v)
 
             if v >= 2:
-                # print(f'check col Consistency={False}')
+                print(f'check col Consistency={False}')
                 return False
 
     for (coords1, coords2) in snapshot.getConstraints():
         var1 = snapshot.getCellVal(coords1[0], coords1[1])
         var2 = snapshot.getCellVal(coords2[0], coords2[1])
-        if var1 == 4:
+        if var1 >= 5:
+            print(f'check Consistency var1 >= 5 ={False}')
             return False
-        if var2 == 1:
+        if var2 != 0 and var2 <= 1:
+            print(f'check Consistency var2 <= 1 ={False}')
             return False
 
         if var1 > 0 and var2 > 0 and var1 >= var2:
+            print(f'check Consistency var1 > 0 and var2 > 0 and var1 >= var2 ={False}')
             return False
 
-    # print(f'checkConsistency={True}')
+    print(f'checkConsistency={True}')
     return True
 
 

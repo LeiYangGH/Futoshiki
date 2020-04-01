@@ -30,21 +30,27 @@ class cell:
         if not self.possibles:
             fullset = {1, 2, 3, 4, 5}
             for (coords1, coords2) in snapshot.getConstraints():
-                if coords1[0] == self.row and coords1[1] == self.col: #self is lower
-                    var2 = snapshot.getCellVal(coords2[0], coords2[1])
-                    print(f'var2={var2}')
-                    for small in range(1, var2):
-                        if small in fullset:
-                            fullset.remove(small)
-                            print(f'remove small {small}')
-                if coords2[0] == self.row and coords2[1] == self.col: #self is bigger
-                    var1 = snapshot.getCellVal(coords1[0], coords1[1])
-                    print(f'var1={var1}')
-
-                    for big in range(var1,6):
+                if coords1[0] == self.row and coords1[1] == self.col: #self is smaller
+                    var_big = snapshot.getCellVal(coords2[0], coords2[1])
+                    print(f'var_big={var_big}')
+                    if var_big == 0:
+                        var_big = 5
+                        print(f'fix var_small={var_big}')
+                    for big in range(var_big,6):
                         if big in fullset:
                             fullset.remove(big)
                             print(f'remove big {big}')
+                if coords2[0] == self.row and coords2[1] == self.col: #self is bigger
+                    var_small = snapshot.getCellVal(coords1[0], coords1[1])
+                    print(f'var_small={var_small}')
+                    if var_small == 0:
+                        var_small = 1
+                        print(f'fix var_small={var_small}')
+                    for small in range(1, var_small+1):
+                        if small in fullset:
+                            fullset.remove(small)
+                            print(f'remove small {small}')
+
 
 
                 # var1 = snapshot.getCellVal(coords1[0], coords1[1])
