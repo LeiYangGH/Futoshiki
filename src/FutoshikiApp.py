@@ -39,8 +39,8 @@ while done == False:
                 Solver.solve(firstSnapshot, screen)
             if event.key == pygame.K_h:
                 # Choose a random puzzle to solve
-                # hardpuzzle = random.choice(os.listdir("hardpuzzles"))  # change dir name if necessary
-                hardpuzzle = "hardpuzzle.txt"
+                hardpuzzle = random.choice(os.listdir("hardpuzzles"))  # change dir name if necessary
+                # hardpuzzle = "hardpuzzle.txt"
                 hardpuzzle = "hardpuzzles/" + hardpuzzle
                 firstSnapshot = Futoshiki_IO.loadPuzzle(hardpuzzle)
                 Solver.solve(firstSnapshot, screen)

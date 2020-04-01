@@ -6,6 +6,7 @@
 
 import Cell
 
+
 class snapshot:
     def __init__(self):
         self.rows = 5
@@ -15,48 +16,48 @@ class snapshot:
             # Add an empty array that will hold each cell in this row
             self.cells.append([])
             for column in range(5):
-                self.cells[row].append(Cell.cell(row, column, 0)) # Append a cell
-        self.constraints =[]
-        
+                self.cells[row].append(Cell.cell(row, column, 0))  # Append a cell
+        self.constraints = []
+
     def setCellVal(self, i, j, val):
         self.cells[i][j].setVal(val)
-        
-    def getCellVal(self, i,j):
+
+    def getCellVal(self, i, j):
         return self.cells[i][j].getVal()
-    
+
     def setConstraint(self, coords):
         self.constraints.append(coords)
-    
-    def getConstraints(self): 
-        constraints = []  
+
+    def getConstraints(self):
+        constraints = []
         for c in self.constraints:
             coords1 = (c[0], c[1])
-            coords2 = (c[2],c[3])
-            constraints.append((coords1,coords2))
+            coords2 = (c[2], c[3])
+            constraints.append((coords1, coords2))
         return constraints
-        
-    def cellsByRow(self,row):
+
+    def cellsByRow(self, row):
         return self.cells[row]
-    
-    def cellsByCol(self,col):
+
+    def cellsByCol(self, col):
         column = []
         for row in range(5):
             column.append(self.cells[row][col])
         return column
-    
+
     def unsolvedCells(self):
         unsolved = []
         for row in range(5):
             for col in range(5):
-              if self.cells[row][col].getVal() == 0 :
-                 unsolved.append(self.cells[row][col])
+                if self.cells[row][col].getVal() == 0:
+                    unsolved.append(self.cells[row][col])
         return unsolved
-        
+
     def clone(self):
         clone = snapshot()
         for row in range(5):
             for col in range(5):
-              clone.setCellVal(row,col,self.getCellVal(row,col))
-        for c in self.constraints:     
+                clone.setCellVal(row, col, self.getCellVal(row, col))
+        for c in self.constraints:
             clone.setConstraint(c)
         return clone

@@ -18,7 +18,7 @@ def solve(snapshot, screen):
         # print('return True *********************')
         return True
 
-    next_empty_cell = snapshot.unsolvedCells()[0]
+    next_empty_cell = sorted(snapshot.unsolvedCells(), key=lambda x: len(x.getPossibles(snapshot)))[0]
 
     for var in next_empty_cell.getPossibles(snapshot):
         print(f'trying fill [{next_empty_cell.getRow()},{next_empty_cell.getCol()}] var={var}')
