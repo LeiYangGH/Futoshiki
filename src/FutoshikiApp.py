@@ -19,6 +19,7 @@ clock = pygame.time.Clock()
 # -------- Main Program Loop -----------
 while done == False:
     for event in pygame.event.get():  # User did something
+
         if event.type == pygame.QUIT:  # If user clicked close
             done = True  # Flag that we are done so we exit this loop
         if event.type == pygame.KEYDOWN:  # If user wants to perform an action
@@ -38,7 +39,8 @@ while done == False:
                 Solver.solve(firstSnapshot, screen)
             if event.key == pygame.K_h:
                 # Choose a random puzzle to solve
-                hardpuzzle = random.choice(os.listdir("hardpuzzles"))  # change dir name if necessary
+                # hardpuzzle = random.choice(os.listdir("hardpuzzles"))  # change dir name if necessary
+                hardpuzzle = "hardpuzzle.txt"
                 hardpuzzle = "hardpuzzles/" + hardpuzzle
                 firstSnapshot = Futoshiki_IO.loadPuzzle(hardpuzzle)
                 Solver.solve(firstSnapshot, screen)
